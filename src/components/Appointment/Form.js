@@ -16,14 +16,14 @@ export default function Form(props) {
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
-        <form onSubmit={event => event.preventDefault()} autoComplete="off">
+        <form  autoComplete="off">
           <input
             className="appointment__create-input text--semi-bold"
             name="name"
             type="text"
             placeholder="Enter Student Name"
             value={student}
-            onChange={(event) => setStudent(event.target.value)}//how to figure out if it is a event handler??
+            onChange={(event) => setStudent(event.target.value)}//how to figure out if it is a event handler, it inside <input>
        
           />
         </form>
