@@ -4,8 +4,9 @@ import "components/Application.scss";
 import "components/Appointment";
 import Appointment from "components/Appointment";
 import axios from "axios";
-import { getAppointmentsForDay, getInterview } from "helpers/selectors";
-import useVisualMode from "hooks/useVisualMode";
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
+//import useVisualMode from "hooks/useVisualMode";
+
 
 // const days = [
 //   {
@@ -67,7 +68,7 @@ import useVisualMode from "hooks/useVisualMode";
 
 
 export default function Application(props) {
- //const [days, setDays] = useState([]);
+  //const [days, setDays] = useState([]);
   //const [day, setDay] = useState("Monday");
 
   const [state, setState] = useState({
@@ -77,7 +78,8 @@ export default function Application(props) {
     interviewers: {}
   });
 
-let dailyAppointments = [];
+  let dailyAppointments = [];
+  let dailyInterviewers = [];
 
   const setDay = (day) => {
     setState({ ...state, day })
@@ -94,29 +96,33 @@ let dailyAppointments = [];
     const interviewersUrl = `http://localhost:8001/api/interviewers`;
 
     Promise.all([
-    axios.get(daysUrl),
-    axios.get(appointmentsUrl),
-    axios.get(interviewersUrl)
-  ])
-    .then((all) => {
-      //console.log("all",all)
-      //setDays(all[0].data);
-      setState((prev) => {
-        return ({...prev,days:all[0].data,appointments:all[1].data, interviewers:all[2].data})}) //if do not use one line code, it needs to use 'return'
-    })
+      axios.get(daysUrl),
+      axios.get(appointmentsUrl),
+      axios.get(interviewersUrl)
+    ])
+      .then((all) => {
+        //console.log("all",all)
+        //setDays(all[0].data);
+        setState((prev) => {
+          return ({ ...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data })
+        }) //if do not use one line code, it needs to use 'return'
+      })
 
-  },[])
+  }, [])
 
-  dailyAppointments = getAppointmentsForDay(state,state.day);
+  dailyAppointments = getAppointmentsForDay(state, state.day);
+  dailyInterviewers = getInterviewersForDay(state, state.day);
   const a = dailyAppointments.map((ap) => {
     return (
       <Appointment
         key={ap.id}
         time={ap.time}
         interview={ap.interview}
+        interviewers={dailyInterviewers}
       />
     )
-  })
+  });
+
   return (
     <main className="layout">
       <section className="sidebar">
