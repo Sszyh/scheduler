@@ -7,13 +7,13 @@ export default function useVisualMode(initial) {
     if (replace) {
       history.pop()
     }
-    setMode(newMode) 
-    history.push(newMode);
+    history.push(newMode)
+    return setMode(newMode) 
   };
  
   const back = () => { 
     history.pop();
-    history.length >= 1?
+    return history.length >= 1?
     setMode(history[history.length -1])
       :
     setMode(mode) 
