@@ -14,6 +14,21 @@ export function getAppointmentsForDay(state, day) {
   }
   return result;
 }
+/* result data example
+[
+  {
+    id:1,
+    time:'time',
+    interview:{
+      student:"e",
+      interviewer:1
+    }
+  },
+  {
+
+  }
+]
+*/
 
 export function getInterview(state, interview) {
   let result = {};
@@ -24,6 +39,13 @@ export function getInterview(state, interview) {
   } 
     return null;
   }
+
+  /* result data example
+  {
+    student:"e",
+    interviewer:"sef"
+  }
+  */
 
   export function getInterviewersForDay(state, day) {
     const result = [];
@@ -37,3 +59,15 @@ export function getInterview(state, interview) {
     }
     return result;
   }
+  
+/*
+   result data example
+  [
+    {
+      id:1,
+      name:"sy",
+      avatar:"https://i.imgur.com/LpaY82x.png"
+    },
+    {}
+  ]
+ */ 
