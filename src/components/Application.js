@@ -97,7 +97,8 @@ export default function Application(props) {
     Promise.all([
       axios.get(daysUrl),
       axios.get(appointmentsUrl),
-      axios.get(interviewersUrl)
+      axios.get(interviewersUrl),
+      //axios.get(`/api/debug/reset`)
     ])
       .then((all) => {
         //console.log("all",all)
@@ -113,7 +114,7 @@ export default function Application(props) {
   dailyInterviewers = getInterviewersForDay(state, state.day);
 
   function bookInterview(id, interview) {
-    console.log(id, interview);
+    //console.log("id",id, interview);
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -122,24 +123,30 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
-    setState({...state,appointments})
+
+    return axios.put(`/api/appointments/${id}`, { interview })
+      .then((res) => {
+        console.log("res", res);
+        setState({ ...state, appointments });
+
+      })
   }
-/* appointment data example
-[
-  {
-    id:1,
-    time:'time',
-    interview:{
-      student:"e",
-      interviewer:1
-    }
-  },
-  {}
-]
-*/
-  
+  /* appointment data example
+  [
+    {
+      id:1,
+      time:'time',
+      interview:{
+        student:"e",
+        interviewer:1
+      }
+    },
+    {}
+  ]
+  */
+
   const a = dailyAppointments.map((ap) => {
-    const interview = getInterview(state,ap.interview)
+    const interview = getInterview(state, ap.interview)
     return (
       <Appointment
         key={ap.id}
