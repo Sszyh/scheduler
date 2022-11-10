@@ -150,8 +150,11 @@ export default function Application(props) {
     return axios.delete(`/api/appointments/${id}`)
       .then((res) => {
         console.log("ress", res);
+      });
+  }
 
-      })
+  function editInterview(){
+    
   }
   const a = dailyAppointments.map((ap) => {
     const interview = getInterview(state, ap.interview)
