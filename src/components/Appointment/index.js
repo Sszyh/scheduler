@@ -19,7 +19,6 @@ const EDIT = "EDIT";
 const ERROR_SAVE = "ERROR_SAVE";
 const ERROR_DELETE = "ERROR_DELETE";
 
-
 export default function Appointment(props) {
   function save(name, interviewer) {
 
@@ -31,11 +30,8 @@ export default function Appointment(props) {
     props.bookInterview(props.id, interview)
       .then(() => transition(SHOW))
       .catch((err) => {
-        console.log("err from save", err);
         transition(ERROR_SAVE, true)
       });
-
-
   }
 
   function deleteAppointment(id) {
@@ -43,7 +39,6 @@ export default function Appointment(props) {
     props.cancelInterview(props.id)
       .then(() => transition(EMPTY))
       .catch((err) => {
-        console.log("err from delete", err);
         transition(ERROR_DELETE, true)
       })
 

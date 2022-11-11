@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function useVisualMode(initial) {
   const [mode, setMode] = useState(initial);
@@ -12,9 +12,7 @@ export default function useVisualMode(initial) {
   };
 
   const back = () => {
-    console.log("his", history)
     history.pop();
-    console.log("his-after", history)
     return history.length >= 1 ?
       setMode(history[history.length - 1])
       :

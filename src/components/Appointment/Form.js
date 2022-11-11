@@ -23,7 +23,7 @@ export default function Form(props) {
             type="text"
             placeholder="Enter Student Name"
             value={student}
-            onChange={(event) => setStudent(event.target.value)}//how to figure out if it is a event handler, it inside <input>
+            onChange={(event) => setStudent(event.target.value)}//to figure out if it is a event handler: it inside <input>
 
           />
         </form>
