@@ -25,8 +25,13 @@ export default function useApplicationData() {
 
     return axios.put(`/api/appointments/${id}`, { interview })
       .then((res) => {
-        console.log("res", res);
         setState({ ...state, appointments });
+        setSpotsDelete(id);
+        console.log("id", id)
+        setState((prve) => {
+          return ({ ...prve, days: state.days })
+        })
+        console.log("aftersetspot,", state)
       })
   }
 
@@ -34,8 +39,10 @@ export default function useApplicationData() {
     state.appointments[id].interview = null;
     return axios.delete(`/api/appointments/${id}`)
       .then((res) => {
-        console.log("ress", res);
+        setSpotsAdd(id);
+        setState({ ...state, days: state.days });
       })
+
   }
 
   useEffect(() => {
@@ -47,6 +54,7 @@ export default function useApplicationData() {
       axios.get(daysUrl),
       axios.get(appointmentsUrl),
       axios.get(interviewersUrl),
+      //axios.get(`/api/debug/reset`)
     ])
       .then((all) => {
         setState((prev) => {
@@ -55,6 +63,43 @@ export default function useApplicationData() {
       })
 
   }, [])
+  function setSpotsAdd(id) {
+    if (id > 0 && id <= 5) {
+      state.days[0].spots += 1;
+    }
+    if (id >= 6 && id <= 10) {
+      state.days[1].spots += 1;
+    }
+    if (id >= 11 && id <= 15) {
+      state.days[2].spots += 1;
+    }
+    if (id >= 16 && id <= 20) {
+      state.days[3].spots += 1;
+    }
+    if (id >= 21 && id <= 25) {
+      state.days[4].spots += 1;
+    }
+    return state.days;
+  }
+  function setSpotsDelete(id) {
+    console.log("ssss")
+    if (id > 0 && id <= 5) {
+      state.days[0].spots -= 1;
+    }
+    if (id >= 6 && id <= 10) {
+      state.days[1].spots -= 1;
+    }
+    if (id >= 11 && id <= 15) {
+      state.days[2].spots -= 1;
+    }
+    if (id >= 16 && id <= 20) {
+      state.days[3].spots -= 1;
+    }
+    if (id >= 21 && id <= 25) {
+      state.days[4].spots -= 1;
+    }
+    return state.days;
 
+  }
   return { state, setDay, bookInterview, cancelInterview }
 }
