@@ -1,10 +1,10 @@
 import React from "react";
-import "./styles.scss"
+import "./styles.scss";
 import Header from "./Header";
 import Show from "./Show";
 import Empty from "./Empty";
 import useVisualMode from "hooks/useVisualMode";
-import Form from "./Form"
+import Form from "./Form";
 import Status from "./Status";
 import Confirm from "./Confirm";
 import Error from "./Error";
@@ -30,7 +30,7 @@ export default function Appointment(props) {
     props.bookInterview(props.id, interview)
       .then(() => transition(SHOW))
       .catch((err) => {
-        transition(ERROR_SAVE, true)
+        transition(ERROR_SAVE, true);
       });
   }
 
@@ -39,8 +39,8 @@ export default function Appointment(props) {
     props.cancelInterview(props.id)
       .then(() => transition(EMPTY))
       .catch((err) => {
-        transition(ERROR_DELETE, true)
-      })
+        transition(ERROR_DELETE, true);
+      });
 
   }
   const { mode, transition, back } = useVisualMode(
@@ -86,5 +86,5 @@ export default function Appointment(props) {
       />}
     </article>
 
-  )
+  );
 }

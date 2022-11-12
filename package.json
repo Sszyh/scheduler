@@ -17,7 +17,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public --ci",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "eslint": "./node_modules/.bin/eslint"
   },
   "browserslist": {
     "production": [
@@ -41,6 +42,8 @@
     "@testing-library/jest-dom": "^4.0.0",
     "@testing-library/react": "^8.0.7",
     "babel-loader": "^8.0.5",
+    "eslint": "^8.27.0",
+    "eslint-plugin-react": "^7.31.10",
     "sass": "^1.53.0"
   },
   "jest": {

@@ -36,30 +36,30 @@ export function getInterview(state, interview) {
     result.student = interview.student;
     result.interviewer = state.interviewers[interview.interviewer];
     return result;
-  } 
-    return null;
   }
+  return null;
+}
 
-  /* result data example
-  {
-    student:"e",
-    interviewer:"sef"
-  }
-  */
+/* result data example
+{
+  student:"e",
+  interviewer:"sef"
+}
+*/
 
-  export function getInterviewersForDay(state, day) {
-    const result = [];
-  
-    for (let d of state.days) {
-      if (d.name === day) {
-        for (let a of d.interviewers) {
-         result.push(state.interviewers[a]);
-        }
+export function getInterviewersForDay(state, day) {
+  const result = [];
+
+  for (let d of state.days) {
+    if (d.name === day) {
+      for (let a of d.interviewers) {
+        result.push(state.interviewers[a]);
       }
     }
-    return result;
   }
-  
+  return result;
+}
+
 /*
    result data example
   [

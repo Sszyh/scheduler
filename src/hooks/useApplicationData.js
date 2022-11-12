@@ -10,7 +10,7 @@ export default function useApplicationData() {
   });
 
   const setDay = (day) => {
-    setState({ ...state, day })
+    setState({ ...state, day });
   };
 
   const bookInterview = (id, interview) => {
@@ -27,13 +27,9 @@ export default function useApplicationData() {
       .then((res) => {
         setState({ ...state, appointments });
         setSpotsDelete(id);
-        console.log("id", id)
-        setState((prve) => {
-          return ({ ...prve, days: state.days })
-        })
-        console.log("aftersetspot,", state)
-      })
-  }
+        setState(prve => ({ ...prve, days: state.days }));//arrow function to write code in one line
+      });
+  };
 
   const cancelInterview = (id) => {
     state.appointments[id].interview = null;
@@ -41,9 +37,9 @@ export default function useApplicationData() {
       .then((res) => {
         setSpotsAdd(id);
         setState({ ...state, days: state.days });
-      })
+      });
 
-  }
+  };
 
   useEffect(() => {
     const daysUrl = `http://localhost:8001/api/days`;
@@ -58,11 +54,12 @@ export default function useApplicationData() {
     ])
       .then((all) => {
         setState((prev) => {
-          return ({ ...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data })
-        }) //if do not use one line code, it needs to use 'return'
-      })
+          return ({ ...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data });
+        }); //if do not use one line code, it needs to use 'return'
+      });
 
-  }, [])
+  }, []);
+  
   function setSpotsAdd(id) {
     if (id > 0 && id <= 5) {
       state.days[0].spots += 1;
@@ -82,7 +79,7 @@ export default function useApplicationData() {
     return state.days;
   }
   function setSpotsDelete(id) {
-    console.log("ssss")
+    console.log("ssss");
     if (id > 0 && id <= 5) {
       state.days[0].spots -= 1;
     }
@@ -101,5 +98,5 @@ export default function useApplicationData() {
     return state.days;
 
   }
-  return { state, setDay, bookInterview, cancelInterview }
+  return { state, setDay, bookInterview, cancelInterview };
 }

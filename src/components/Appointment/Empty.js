@@ -11,5 +11,5 @@ export default function Empty(props) {
       />
       
     </main>
-  )
+  );
 }
