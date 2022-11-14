@@ -11,11 +11,11 @@ const CANCEL_INTERVIEW = "CANCEL_INTERVIEW";
 function reducer(state, action) {
   switch (action.type) {
     case SET_DAY:
-      return {...state, day}
+      return { ...state, day: action.day }
     case SET_APPLICATION_DATA:
-      return {...state, days, appointments, interviewers}
+      return { ...state, days:action.days, appointments:action.appointments, interviewers:action.interview }
     case SET_INTERVIEW:
-      return {...state, interview}
+      return { ...state, interview:interview }
 
     default:
       throw new Error(
@@ -37,7 +37,7 @@ export default function useApplicationData() {
   });
 
   const setDay = (day) => {
-    setState({ ...state, day });
+    dispatch({ type: SET_DAY, day })
   };
 
   const bookInterview = (id, interview) => {
@@ -52,6 +52,7 @@ export default function useApplicationData() {
 
     return axios.put(`/api/appointments/${id}`, { interview })
       .then((res) => {
+        dispatch({ type: [SET_INTERVIEW], id, interview })
         setState({ ...state, appointments });
         setSpotsDelete(id);
         setState(prve => ({ ...prve, days: state.days }));//arrow function to write code in one line
@@ -80,9 +81,16 @@ export default function useApplicationData() {
       //axios.get(`/api/debug/reset`)
     ])
       .then((all) => {
-        setState((prev) => {
-          return ({ ...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data });
-        }); //if do not use one line code, it needs to use 'return'
+        dispatch({
+          type: [SET_APPLICATION_DATA],
+          days: all[0].data,
+          appointments: all[1].data,
+          interviewers: all[2].data
+        });
+        // setState((prev) => {
+
+        //   return ({ ...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data });
+        // }); //if do not use one line code, it needs to use 'return'
       });
 
   }, []);
