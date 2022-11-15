@@ -31,7 +31,6 @@ export function getAppointmentsForDay(state, day) {
 */
 
 export function getInterview(state, interview) {
-  console.log("interview",interview);
   let result = {};
   if (interview !== null) {
     result.student = interview.student;

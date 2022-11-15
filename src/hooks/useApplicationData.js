@@ -5,7 +5,7 @@ const SET_DAY = "SET_DAY";
 const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
 const SET_INTERVIEW = "SET_INTERVIEW";
 
-
+// debug with mentor and get idea of calculate spots
 function reducer(state, action) {
   let newState = {};
   switch (action.type) {
@@ -43,10 +43,6 @@ function reducer(state, action) {
   }) 
   return newState;
 }
-// dispatch({ type: [SET_DAY], day })
-// dispatch({ type: [SET_APPLICATION_DATA], days, appointments, interviewers })
-// dispatch({ type: [SET_INTERVIEW], id, interview })
-// dispatch({ type: [SET_INTERVIEW], id, interview: null })
 
 export default function useApplicationData() {
   const [state, dispatch] = useReducer(reducer, {
@@ -57,7 +53,7 @@ export default function useApplicationData() {
   });
 
   const setDay = (day) => {
-    dispatch({ type: SET_DAY, day })
+    dispatch({ type: SET_DAY, day:day })
   };
 
   const bookInterview = (appointmentId, interview) => {
@@ -72,7 +68,7 @@ export default function useApplicationData() {
 
     return axios.put(`/api/appointments/${appointmentId}`, { interview })
       .then((res) => {
-        dispatch({ type: SET_INTERVIEW, appointmentId: appointmentId, interview })
+        dispatch({ type: SET_INTERVIEW, appointmentId: appointmentId, interview:interview })
         // setState({ ...state, appointments });
         // setSpotsDelete(id);
         // dispatch({type: SET_INTERVIEW, state:prve => ({ ...prve, days: state.days })})
@@ -80,13 +76,14 @@ export default function useApplicationData() {
       });
   };
 
-  const cancelInterview = (id) => {
-    state.appointments[id].interview = null;
+  const cancelInterview = (appointmentId) => {
+    //state.appointments[appointmentId].interview = null;
     // dispatch({ type: CANCEL_INTERVIEW, id, interview: null })
-    return axios.delete(`/api/appointments/${id}`)
+    return axios.delete(`/api/appointments/${appointmentId}`)
       .then((res) => {
         // setSpotsAdd(id);
-        dispatch({ type: SET_INTERVIEW, state: { ...state, days: state.days } })
+        dispatch({ type: SET_INTERVIEW, appointmentId:appointmentId, interview: null })
+        //dispatch({ type: SET_INTERVIEW, state: { ...state, days: state.days } })
         //setState({ ...state, days: state.days });
       });
 
