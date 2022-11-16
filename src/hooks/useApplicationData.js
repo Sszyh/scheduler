@@ -22,21 +22,36 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
-
+    let midState = { ...state, appointments };
     return axios.put(`/api/appointments/${id}`, { interview })
       .then((res) => {
-        setState({ ...state, appointments });
-        setSpotsDelete(id);
-        setState(prve => ({ ...prve, days: state.days }));//arrow function to write code in one line
+        // setState({ ...state, appointments });
+        let newState = setSpotsUpdate(midState);
+        setState(newState);//arrow function to write code in one line
+        console.log("ssss")
       });
   };
 
   const cancelInterview = (id) => {
-    state.appointments[id].interview = null;
+    // state.appointments[id].interview = null;
+
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    let midState = { ...state, appointments };
+
     return axios.delete(`/api/appointments/${id}`)
       .then((res) => {
-        setSpotsAdd(id);
-        setState({ ...state, days: state.days });
+        // setSpotsUpdate();
+
+        // setState(prevs => ({ ...prevs, days: state.days }));
+        let newState = setSpotsUpdate(midState);
+        setState(newState);
       });
 
   };
@@ -59,43 +74,20 @@ export default function useApplicationData() {
       });
 
   }, []);
-  
-  function setSpotsAdd(id) {
-    if (id > 0 && id <= 5) {
-      state.days[0].spots += 1;
-    }
-    if (id >= 6 && id <= 10) {
-      state.days[1].spots += 1;
-    }
-    if (id >= 11 && id <= 15) {
-      state.days[2].spots += 1;
-    }
-    if (id >= 16 && id <= 20) {
-      state.days[3].spots += 1;
-    }
-    if (id >= 21 && id <= 25) {
-      state.days[4].spots += 1;
-    }
-    return state.days;
-  }
-  function setSpotsDelete(id) {
-    console.log("ssss");
-    if (id > 0 && id <= 5) {
-      state.days[0].spots -= 1;
-    }
-    if (id >= 6 && id <= 10) {
-      state.days[1].spots -= 1;
-    }
-    if (id >= 11 && id <= 15) {
-      state.days[2].spots -= 1;
-    }
-    if (id >= 16 && id <= 20) {
-      state.days[3].spots -= 1;
-    }
-    if (id >= 21 && id <= 25) {
-      state.days[4].spots -= 1;
-    }
-    return state.days;
+
+  function setSpotsUpdate(midState) {
+
+    midState.days.map((day) => {
+
+      day.spots = 0;
+      for (let apId of day.appointments) {
+        if (midState.appointments[apId].interview === null) {
+          day.spots++;
+        }
+      }
+      //return day;
+    })
+    return midState;
 
   }
   return { state, setDay, bookInterview, cancelInterview };
