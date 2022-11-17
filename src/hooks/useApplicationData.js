@@ -58,7 +58,7 @@ export default function useApplicationData() {
       axios.get(daysUrl),
       axios.get(appointmentsUrl),
       axios.get(interviewersUrl),
-      //axios.get(`/api/debug/reset`)
+      // axios.get(`/api/debug/reset`)
     ])
       .then((all) => {
         setState((prev) => {
