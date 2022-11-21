@@ -1,6 +1,8 @@
 import React from "react";
 import "components/InterviewerList.scss";
 import InterviewerListItem from "./InterviewerListItem";
+import PropTypes from 'prop-types'; 
+
 
 export default function InterviewerList(props) {
   const interviewerArr = props.interviewers.map((inter) => {
@@ -26,3 +28,8 @@ export default function InterviewerList(props) {
     </section>
   )
 }
+
+InterviewerList.propTypes = {
+  interviewers: PropTypes.array
+}
+//is that nessasary to write function as function() {}, export default?
