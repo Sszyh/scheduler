@@ -24,10 +24,10 @@ This application uses Storybook, Jest, and Cypress for implementing unit, integr
 
 ## **Features**
 * Normal Feature
-!["normal-feature-gif"](public/images/scheduler-normal.gif);
+!["normal-feature-gif"](docs/scheduler-normal.gif);
 
 * Error Feature
-!["error-feature-gif"](public/images/scheduler-error.gif)
+!["error-feature-gif"](docs/scheduler-error.gif)
 
 
 
