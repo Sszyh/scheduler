@@ -9,7 +9,7 @@ export default function DayListItem(props) {
   });
   return (
     <li onClick={props.setDay} className={dayClass} data-testid="day">
-      <h2 >{props.name}</h2> 
+      <h2 >{props.name}</h2>
       {props.spots > 1 && <h3 >{props.spots} spots remaining</h3>}
       {props.spots === 0 && <h3 >no spots remaining</h3>}
       {props.spots === 1 && <h3 >1 spot remaining</h3>}

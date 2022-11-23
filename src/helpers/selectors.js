@@ -35,7 +35,7 @@ export function getInterview(state, interview) {
   if (interview !== null) {
     result.student = interview.student;
     result.interviewer = state.interviewers[interview.interviewer];
-    
+
     return result;
   }
   return null;

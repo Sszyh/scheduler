@@ -27,7 +27,7 @@ export default function Appointment(props) {
       interviewer
     };
     transition(SAVING, true);
-    
+
     props.bookInterview(props.id, interview)
       .then(() => transition(SHOW))
       .catch((err) => {
