@@ -77,12 +77,11 @@ export default function useApplicationData() {
     const daysUrl = `http://localhost:8001/api/days`;
     const appointmentsUrl = `http://localhost:8001/api/appointments`;
     const interviewersUrl = `http://localhost:8001/api/interviewers`;
-
     Promise.all([
       axios.get(daysUrl),
       axios.get(appointmentsUrl),
       axios.get(interviewersUrl),
-      //axios.get(`/api/debug/reset`)
+      // axios.get(`http://localhost:8001/api/debug/reset`)
     ])
       .then((all) => {
         dispatch({
