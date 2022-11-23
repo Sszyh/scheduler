@@ -16,7 +16,7 @@ export default function InterviewerList(props) {
         setInterviewer={() => props.onChange(inter.id)}
 
       />
-    )
+    );
   });
 
   return (
@@ -26,10 +26,10 @@ export default function InterviewerList(props) {
         {interviewerArr}
       </ul>
     </section>
-  )
+  );
 }
 
 InterviewerList.propTypes = {
   interviewers: PropTypes.array
-}
+};
 //is that nessasary to write function as function() {}, export default?

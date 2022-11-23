@@ -11,11 +11,11 @@ export default function DayList(props) {
           selected={day.name === props.value}
           setDay={() => props.onChange(day.name)}
         />
-      )
+      );
   });
   return (
     <ul>
       {days}
     </ul>
-  )
+  );
 }
