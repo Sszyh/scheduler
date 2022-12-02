@@ -55,7 +55,6 @@ export default function useApplicationData() {
     dispatch({ type: SET_DAY, day: day })
   };
 
-
   const bookInterview = (appointmentId, interview) => {
 
     return axios.put(`/api/appointments/${appointmentId}`, { interview })
@@ -68,9 +67,7 @@ export default function useApplicationData() {
     return axios.delete(`/api/appointments/${appointmentId}`)
       .then((res) => {
         dispatch({ type: SET_INTERVIEW, appointmentId: appointmentId, interview: null })
-
       });
-
   };
 
   useEffect(() => {
@@ -81,11 +78,9 @@ export default function useApplicationData() {
       axios.get(daysUrl),
       axios.get(appointmentsUrl),
       axios.get(interviewersUrl),
-
       /* leave a axios get request for reset database:
         axios.get(`http://localhost:8001/api/debug/reset`) 
       */
-
     ])
       .then((all) => {
         dispatch({
@@ -96,6 +91,14 @@ export default function useApplicationData() {
         });
       });
 
+    const webSocket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
+
+    webSocket.onmessage = (event) => {
+      const data = JSON.parse(event.data)
+      if (data.type) {
+        dispatch({ type: data.type, appointmentId: data.id, interview: data.interview })
+      }
+    }
   }, []);
 
   return { state, setDay, bookInterview, cancelInterview };
