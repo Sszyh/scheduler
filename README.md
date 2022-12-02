@@ -2,7 +2,7 @@
 
 `Interview Scheduler` is a single-page application (SPA) that allows users to book, edit and cancel technical interviews between students and mentors. The front end of this project is built with React and makes requests to an API to fetch and store appointment data from a database.
 
-This application uses Storybook, Jest, and Cypress for implementing unit, integration and end-to-end test.
+The application also uses WebSocket API to make a persistent connection to the scheduler API server and uses Storybook, Jest, and Cypress for implementing unit, integration and end-to-end test.
 
 
 ## **Getting Started**
