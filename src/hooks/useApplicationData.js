@@ -96,6 +96,17 @@ export default function useApplicationData() {
         });
       });
 
+    const webSocket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
+
+    webSocket.onopen = (event) => {
+      webSocket.send("ping")
+    }
+    webSocket.onmessage = (event) => {
+      const data = JSON.parse(event.data)
+      if (data.type) {
+        dispatch({ type: data.type, appointmentId: data.id, interview:data.interview})
+      }
+    }
   }, []);
 
   return { state, setDay, bookInterview, cancelInterview };

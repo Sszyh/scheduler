@@ -8,6 +8,7 @@ import Form from "./Form";
 import Status from "./Status";
 import Confirm from "./Confirm";
 import Error from "./Error";
+import { useEffect } from "react";
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
@@ -47,12 +48,21 @@ export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
+
+  useEffect(() => {
+    if (props.interview && mode === EMPTY) {
+     transition(SHOW);
+    }
+    if (props.interview === null && mode === SHOW) {
+     transition(EMPTY);
+    }
+   }, [props.interview, transition, mode]);
   return (
     <article className="appointment" data-testid="appointment">
       <Header time={props.time} />
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
       {mode === SAVING && <Status message="Saving update" />}
-      {mode === SHOW && (
+      {mode === SHOW && props.interview &&(
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
