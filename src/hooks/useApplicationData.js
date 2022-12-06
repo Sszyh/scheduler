@@ -52,15 +52,12 @@ export default function useApplicationData() {
   });
 
   useEffect(() => {
-    const daysUrl = `http://localhost:8001/api/days`;
-    const appointmentsUrl = `http://localhost:8001/api/appointments`;
-    const interviewersUrl = `http://localhost:8001/api/interviewers`;
     Promise.all([
-      axios.get(daysUrl),
-      axios.get(appointmentsUrl),
-      axios.get(interviewersUrl),
+      axios.get("api/days"),
+      axios.get("api/appointments"),
+      axios.get("api/interviewers"),
       /* leave a axios get request for reset database:
-        axios.get(`http://localhost:8001/api/debug/reset`) 
+        axios.get("api/debug/reset") 
       */
     ])
       .then((all) => {
@@ -81,7 +78,7 @@ export default function useApplicationData() {
       }
     }
   }, []);
-  
+
   const setDay = (day) => {
     dispatch({ type: SET_DAY, day: day })
   };
