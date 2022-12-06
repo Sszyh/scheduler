@@ -30,5 +30,14 @@ The application also uses WebSocket API to make a persistent connection to the s
 !["error-feature-gif"](docs/scheduler-error.gif)
 
 
+## **Dependencies** 
+
+* @testing-library/react-hooks
+* axios
+* classnames
+* react
+* react-test-renderer
+* Testing Storybook, Cypress
+
 
 
