@@ -57,7 +57,7 @@ export default function Appointment(props) {
      transition(EMPTY);
     }
    }, [props.interview, transition, mode]);
-  console.log("props",props)
+   
   return (
     <article className="appointment" data-testid="appointment">
       <Header time={props.time} />
