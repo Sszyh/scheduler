@@ -27,7 +27,7 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-    transition(SAVING, true);
+    transition(SAVING);
 
     props.bookInterview(props.id, interview)
       .then(() => transition(SHOW))
@@ -57,6 +57,7 @@ export default function Appointment(props) {
      transition(EMPTY);
     }
    }, [props.interview, transition, mode]);
+
   return (
     <article className="appointment" data-testid="appointment">
       <Header time={props.time} />
@@ -85,7 +86,7 @@ export default function Appointment(props) {
         interviewers={props.interviewers}
         onCancel={() => transition(SHOW)}
         onSave={save}
-        interviewer={props.interviewer}
+        interviewer={props.interview.interviewer.id}
         student={props.interview.student}
       />}
       {mode === ERROR_SAVE && <Error

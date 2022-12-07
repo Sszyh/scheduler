@@ -51,36 +51,13 @@ export default function useApplicationData() {
     interviewers: {}
   });
 
-  const setDay = (day) => {
-    dispatch({ type: SET_DAY, day: day })
-  };
-
-  const bookInterview = (appointmentId, interview) => {
-
-    return axios.put(`/api/appointments/${appointmentId}`, { interview })
-      .then((res) => {
-        dispatch({ type: SET_INTERVIEW, appointmentId: appointmentId, interview: interview })
-      });
-  };
-
-  const cancelInterview = (appointmentId) => {
-    return axios.delete(`/api/appointments/${appointmentId}`)
-      .then((res) => {
-        dispatch({ type: SET_INTERVIEW, appointmentId: appointmentId, interview: null })
-      });
-  };
-
   useEffect(() => {
-    const daysUrl = `http://localhost:8001/api/days`;
-    const appointmentsUrl = `http://localhost:8001/api/appointments`;
-    const interviewersUrl = `http://localhost:8001/api/interviewers`;
     Promise.all([
-      axios.get(daysUrl),
-      axios.get(appointmentsUrl),
-      axios.get(interviewersUrl),
-      /* leave a axios get request for reset database:
-        axios.get(`http://localhost:8001/api/debug/reset`) 
-      */
+      axios.get("api/days"),
+      axios.get("api/appointments"),
+      axios.get("api/interviewers"),
+      // axios.get("api/debug/reset") 
+      /* leave a axios get request for reset database */
     ])
       .then((all) => {
         dispatch({
@@ -100,6 +77,25 @@ export default function useApplicationData() {
       }
     }
   }, []);
+
+  const setDay = (day) => {
+    dispatch({ type: SET_DAY, day: day })
+  };
+
+  const bookInterview = (appointmentId, interview) => {
+
+    return axios.put(`/api/appointments/${appointmentId}`, { interview })
+      .then((res) => {
+        dispatch({ type: SET_INTERVIEW, appointmentId: appointmentId, interview: interview })
+      });
+  };
+
+  const cancelInterview = (appointmentId) => {
+    return axios.delete(`/api/appointments/${appointmentId}`)
+      .then((res) => {
+        dispatch({ type: SET_INTERVIEW, appointmentId: appointmentId, interview: null })
+      });
+  };
 
   return { state, setDay, bookInterview, cancelInterview };
 }

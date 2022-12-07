@@ -50,9 +50,11 @@ export default function Form(props) {
           onChange={setInterviewer}
         />
       </section>
+      
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button danger onClick={() => cancel()}>Cancel</Button>
+          <Button danger onClick={cancel}>Cancel</Button> 
+          {/* change from () => cancel() to cancel, aviod redundant function calls */}
           <Button confirm onClick={() => { validate(); }}>Save</Button>
         </section>
       </section>
