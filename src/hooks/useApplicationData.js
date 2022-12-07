@@ -98,7 +98,5 @@ export default function useApplicationData() {
       });
   };
 
-
-
   return { state, setDay, bookInterview, cancelInterview };
 }
