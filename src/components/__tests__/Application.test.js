@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, cleanup, waitForElement, fireEvent, getByText, getAllByTestId, getByAltText, getByPlaceholderText, waitForElementToBeRemoved, queryByText } from "@testing-library/react";
+import { render, cleanup, waitForElement, fireEvent, getByText, getAllByTestId, getByAltText, getByPlaceholderText, waitForElementToBeRemoved, queryByText, prettyDOM } from "@testing-library/react";
 
 import Application from "components/Application";
 
@@ -124,7 +124,8 @@ describe("Application", () => {
     expect(getByText(appointment, "Error")).toBeInTheDocument();
 
     fireEvent.click(getByAltText(appointment, "Close"));
-    expect(getByAltText(appointment, "Add")).toBeInTheDocument();
+    // here can use console.log(prettyDOM(appointment)) to check output.
+    expect(getByText(appointment, "Save")).toBeInTheDocument();
 
   });
 

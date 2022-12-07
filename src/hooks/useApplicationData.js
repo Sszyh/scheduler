@@ -56,9 +56,8 @@ export default function useApplicationData() {
       axios.get("api/days"),
       axios.get("api/appointments"),
       axios.get("api/interviewers"),
-      /* leave a axios get request for reset database:
-        axios.get("api/debug/reset") 
-      */
+      // axios.get("api/debug/reset") 
+      /* leave a axios get request for reset database */
     ])
       .then((all) => {
         dispatch({
